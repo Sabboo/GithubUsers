@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GithubUsers</string>
+    <string name="retry">Retry</string>
+    <string name="users_list">UsersList</string>
+    <string name="compose_content">ComposeContent</string>
+    <string name="no_internet_connection">Connection timed out. Showing the latest locally served version.</string>
+    <string name="search">Search</string>
+    <string name="user_details_tmp">%d: %s</string>
+    <string name="notification_channel_id">12345</string>
+    <string name="notification_title">Downloading image…</string>
+    <string name="cancel_download">Cancel</string>
+    <string name="channel_name">DownloadChannelName</string>
+    <string name="channel_description">Download Images</string>
+    <string name="notes">Notes:</string>
+    <string name="save">Save</string>
+</resources>
