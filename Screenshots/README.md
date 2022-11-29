@@ -2,11 +2,11 @@
 
 Users List
 
-![List](https://myoctocat.com/assets/images/base-octocat.svg)
+<img src="https://raw.githubusercontent.com/Sabboo/GithubUsers/main/Screenshots/1.jpg" width="270" height="600"/>
 
 Search
 
-![Search](https://myoctocat.com/assets/images/base-octocat.svg)
+<img src="https://raw.githubusercontent.com/Sabboo/GithubUsers/main/Screenshots/2.jpg" width="270" height="600"/>
 
 ---
 
@@ -14,8 +14,8 @@ Search
 
 Users List
 
-![List](https://myoctocat.com/assets/images/base-octocat.svg)
+<img src="https://raw.githubusercontent.com/Sabboo/GithubUsers/main/Screenshots/3.jpg" width="270" height="600"/>
 
 Details
 
-![Details](https://myoctocat.com/assets/images/base-octocat.svg)
+<img src="https://raw.githubusercontent.com/Sabboo/GithubUsers/main/Screenshots/4.jpg" width="270" height="600"/>
