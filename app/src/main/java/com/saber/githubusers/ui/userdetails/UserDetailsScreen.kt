@@ -28,6 +28,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.saber.githubusers.R
 import com.saber.githubusers.compose.ErrorItem
 import com.saber.githubusers.compose.LoadingView
+import com.saber.githubusers.compose.OurAppTheme
 import com.saber.githubusers.data.User
 import com.saber.githubusers.utils.checkCachedAvatarExists
 import com.saber.githubusers.utils.getCachedAvatarPath
@@ -44,48 +45,54 @@ fun UserDetailsScreen(
 
     viewModel.fetchUserDetails(userName)
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        userName,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navigationController.invoke() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Localized description"
+    OurAppTheme {
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            userName,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navigationController.invoke() }) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = "Localized description",
+                                tint = MaterialTheme.colorScheme.secondary
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
+                )
+            },
+            modifier = Modifier.statusBarsPadding(),
+        ) {
+            val modifier = Modifier.padding(it)
+            Crossfade(viewState.uiState) { uiState ->
+                when (uiState) {
+                    UIState.LOADING -> LoadingView(modifier = modifier.fillMaxSize())
+                    UIState.CONTENT -> viewState.user?.let { user ->
+                        UserDetailsContent(
+                            user,
+                            modifier = modifier
+                        ) { note -> viewModel.saveNote(note) }
+                    }
+                    UIState.ERROR -> {
+                        ErrorItem(
+                            message = "Error occurred",
+                            onClickRetry = { viewModel.fetchUserDetails(userName) }
                         )
                     }
+                    UIState.IDLE -> {}
                 }
-            )
-        },
-        modifier = Modifier.statusBarsPadding(),
-    ) {
-        val modifier = Modifier.padding(it)
-        Crossfade(viewState.uiState) { uiState ->
-            when (uiState) {
-                UIState.LOADING -> LoadingView(modifier = modifier.fillMaxSize())
-                UIState.CONTENT -> viewState.user?.let { user ->
-                    UserDetailsContent(
-                        user,
-                        modifier = modifier
-                    ) { note -> viewModel.saveNote(note) }
-                }
-                UIState.ERROR -> {
-                    ErrorItem(
-                        message = "Error occurred",
-                        onClickRetry = { viewModel.fetchUserDetails(userName) }
-                    )
-                }
-                UIState.IDLE -> {}
             }
         }
     }
+
 }
 
 @Composable
@@ -126,7 +133,8 @@ fun UserDetailsDescription(description: String) {
     Text(
         modifier = Modifier.padding(all = 16.dp),
         text = description,
-        letterSpacing = 2.sp
+        letterSpacing = 2.sp,
+        color = MaterialTheme.colorScheme.secondary
     )
 }
 
@@ -175,7 +183,10 @@ fun NoteSection(currentNote: String, saveAction: (String) -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             OutlinedButton(onClick = { saveAction.invoke(noteValue.value) }) {
-                Text(text = stringResource(R.string.save))
+                Text(
+                    text = stringResource(R.string.save),
+                    color = MaterialTheme.colorScheme.secondary
+                )
             }
         }
     }
