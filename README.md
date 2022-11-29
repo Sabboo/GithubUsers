@@ -35,3 +35,5 @@ Hilt for dependency injection.
 
 Mixing between Glide (XML views) and Coil (Compose).
 
+### Approaching Requirements
+Please refer to this [document](https://drive.google.com/file/d/1QFh__Ra9EPgxPkOz3K2uxm80DpD-xedO/view?usp=sharing).
