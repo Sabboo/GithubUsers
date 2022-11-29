@@ -109,7 +109,7 @@ fun UserDetailsContent(user: User, modifier: Modifier = Modifier, saveAction: (S
                 .fillMaxWidth()
                 .height(240.dp)
         )
-        UserDetailsDescription(description = "Followers: ${user.followers} - Following: ${user.following}")
+        UserDetailsDescription(description = "Followers: ${user.followers ?: 0} - Following: ${user.following ?: 0}")
         NoteSection(user.note.orEmpty(), saveAction)
     }
 }
