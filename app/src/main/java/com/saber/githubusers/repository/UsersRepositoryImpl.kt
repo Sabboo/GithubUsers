@@ -22,7 +22,7 @@ class UsersRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : UsersRepository {
     override fun users(since: Int) = Pager(
-        config = PagingConfig(pageSize = PAGE_SIZE, prefetchDistance = 0, initialLoadSize = 1),
+        config = PagingConfig(pageSize = PAGE_SIZE),
         remoteMediator = PageKeyedRemoteMediator(db, githubAPI, since)
     ) {
         db.users().getUsers()
