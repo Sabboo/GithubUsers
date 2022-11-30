@@ -56,16 +56,17 @@ class PageKeyedRemoteMediator(
 
             // Update our tables with the new reference to the loadKey
             // And add all the fetched users to user table
-            db.withTransaction {
-                remoteKeyDao.insert(
-                    UserRemoteKey(
-                        (offset + 1).toString(),
-                        data.last().id.toString(),
-                        System.currentTimeMillis()
+            if (data.isNotEmpty())
+                db.withTransaction {
+                    remoteKeyDao.insert(
+                        UserRemoteKey(
+                            (offset + 1).toString(),
+                            data.last().id.toString(),
+                            System.currentTimeMillis()
+                        )
                     )
-                )
-                data.forEach { usersDao.insertOrUpdate(it) }
-            }
+                    data.forEach { usersDao.insertOrUpdate(it) }
+                }
 
             return MediatorResult.Success(endOfPaginationReached = data.isEmpty())
         } catch (e: Exception) {
