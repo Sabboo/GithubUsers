@@ -15,5 +15,6 @@ class UsersViewModel @Inject constructor(private val repository: UsersRepository
         .cachedIn(viewModelScope)
 
     fun searchUsers(query: String) = repository.searchUsers(query)
+        .cachedIn(viewModelScope)
 
 }
