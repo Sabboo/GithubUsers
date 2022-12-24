@@ -23,7 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.saber.githubusers.R
 import com.saber.githubusers.compose.ErrorItem
@@ -36,14 +36,12 @@ import com.saber.githubusers.utils.getCachedAvatarPath
 @ExperimentalMaterial3Api
 @Composable
 fun UserDetailsScreen(
-    viewModel: UserDetailsViewModel = hiltViewModel(),
+    viewModel: UserDetailsViewModel = viewModel(),
     userName: String,
     navigationController: () -> (Unit)
 ) {
 
     val viewState by viewModel.viewStateFlow.collectAsState()
-
-    viewModel.fetchUserDetails(userName)
 
     OurAppTheme {
         Scaffold(
